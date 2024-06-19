@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-  if (!username || !email || !password) {
+  if (!email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 

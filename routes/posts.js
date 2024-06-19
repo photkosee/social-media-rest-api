@@ -5,7 +5,7 @@ const Post = require("../models/posts");
 const { check, validationResult } = require("express-validator");
 
 router.post(
-  "/post",
+  "/create",
   [
     auth,
     [
@@ -26,15 +26,16 @@ router.post(
     try {
       const newPost = new Post({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        author: req.user.id
       });
 
       await newPost.save();
       res.json({
-        id: post.id,
-        title: post.title,
-        description: post.description,
-        createdAt: post.createdAt
+        id: newPost.id,
+        title: newPost.title,
+        description: newPost.description,
+        createdAt: newPost.createdAt
       });
     } catch (err) {
       res.status(500).json({ msg: err.message });
@@ -42,7 +43,7 @@ router.post(
   }
 );
 
-router.delete("/post/:id", auth, async (req, res) => {
+router.delete("/delete/:id", auth, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
     res.json({ msg: "Post deleted" });

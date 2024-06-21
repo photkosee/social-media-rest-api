@@ -9,10 +9,12 @@ require("dotenv").config();
 connectDB();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000"
+}));
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);

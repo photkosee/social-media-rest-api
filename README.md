@@ -10,6 +10,7 @@ There will be a hackathon happening soon at my university. This small project is
 - Mongoose
 - jsonwebtoken
 - bcrypt
+- cors
 
 ## Credits
 
